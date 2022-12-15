@@ -15,7 +15,7 @@ pl = []
 #Opening csv file to read
 with open(budget_csv, "r", encoding="utf8") as csvfile:
 
-    #Assigning reader object
+    #Creating reader object
     csvreader = csv.reader(csvfile, delimiter=",")
 
     #Skipping header row on csv

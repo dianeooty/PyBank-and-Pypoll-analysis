@@ -3,18 +3,15 @@ import os
 import csv
 
 #Filepath for csv
-budget_csv = os.path.join("C:/Users/diane/Desktop/PyBank", "Resources", "budget_data.csv")
-
-#Assigning Variables
-total = 0
-average = 0
+budget_csv = os.path.join("C:/Users/diane/Desktop/Homework/Module3_Python/python-challenge/Pybank", "resources", "budget_data.csv")
+#Assigning empty lists
 dates = []
 pl = []
 
 #Opening csv file to read
 with open(budget_csv, "r", encoding="utf8") as csvfile:
 
-    #Creating reader object
+    #Assigning reader object
     csvreader = csv.reader(csvfile, delimiter=",")
 
     #Skipping header row on csv
@@ -41,11 +38,9 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
     increase = str(increase)
     decrease = str(decrease)
 
-    #Using the string values of increase and decrease to find the keys(date) in the dictionary 
-    date = [k for k, v in newlist.items() if v == increase]
-    date = str(date)
-    date2 = [k for k, v in newlist.items() if v == decrease]
-    date2 = str(date2)
+    #Using the string values of increase and decrease to find the dict keys for date
+    date = str([k for k, v in newlist.items() if v == increase])
+    date2 = str([k for k, v in newlist.items() if v == decrease])
 
     #???Calc is wrong??? Average of the changes from month to month???
     average = round(((f_pl[-1] - f_pl[0]) / len(pl)), 2)

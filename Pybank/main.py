@@ -6,7 +6,6 @@ import csv
 budget_csv = os.path.join("C:/Users/diane/Desktop/PyBank", "Resources", "budget_data.csv")
 
 #Assigning Variables
-months = 0
 total = 0
 average = 0
 dates = []
@@ -56,11 +55,11 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
     print("------------------------------------------------------------")
     print("Financial Analysis")
     print("------------------------------------------------------------")
-    print("Total Months: " + str(len(dates)))
-    print("Total:" + "  $" + str(total))
-    print("Average Change:  " + "$" + str(average))
-    print("Greatest Increase in Profits:  " + date + "  $" + increase)
-    print("Greatest Decrease in Profits:  " + date2 + "  $" + decrease)
+    print(f"Total Months:  {len(dates)}")
+    print(f"Total:  ${total}")
+    print(f"Average Change:  ${average}")
+    print(f"Greatest Increase in Profits:  {date} ${increase}")
+    print(f"Greatest Decrease in Profits:  {date2} ${decrease}")
     print("------------------------------------------------------------")
 
 #???How to write the analysis to file??? 

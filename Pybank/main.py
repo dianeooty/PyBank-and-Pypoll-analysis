@@ -42,8 +42,8 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
     date = str([k for k, v in newlist.items() if v == increase])
     date2 = str([k for k, v in newlist.items() if v == decrease])
 
-    #???Calc is wrong??? Average of the changes from month to month???
-    average = round(((f_pl[-1] - f_pl[0]) / len(pl)), 2)
+    
+    #average = 
 
     #??? How to print the dates without the brackets and quotes???
     #Printing analysis results

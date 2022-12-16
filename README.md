@@ -30,7 +30,8 @@ You can find the complete datasets for both in the resource folders and the anal
 ## Usage
 To analyze the datasets for PyBank and PyPoll, please see scripts below.
 
-`PyBank
+```
+PyBank
 #Importing modules
 import os
 import csv
@@ -223,7 +224,7 @@ filename = "results.txt"
 with open(filename, "w") as f:
     for items in results:
         f.write(items + "\n")
-`
+```
 
 
 ## Project Status

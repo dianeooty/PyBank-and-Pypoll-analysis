@@ -52,7 +52,7 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
     print("------------------------------------------------------------")
     print(f"Total Months:  {len(dates)}")
     print(f"Total:  ${total}")
-    print(f"Average Change:  ${average}")
+#    print(f"Average Change:  ${average}")
     print(f"Greatest Increase in Profits:  {date} ${increase}")
     print(f"Greatest Decrease in Profits:  {date2} ${decrease}")
     print("------------------------------------------------------------")

@@ -42,11 +42,11 @@ with open(election_csv, "r", encoding="utf8") as csvfile:
 
     #Checking which candidate has the greatest number of votes with conditional statements
     winner = ""
-    if cancount1 > (cancount2 and cancount3):
+    if cancount1 > cancount2 and cancount1 > cancount3:
         winner = candidates[0]
-    elif cancount2 > (cancount1 and cancount3):
+    elif cancount2 > cancount1 and cancount2 > cancount3:
         winner = candidates[1]
-    elif cancount3 > (cancount1 and cancount2):
+    elif cancount3 > cancount1 and cancount3 > cancount2:
         winner = candidates[2]
  
     #Printing results

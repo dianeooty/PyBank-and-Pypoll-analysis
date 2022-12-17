@@ -53,7 +53,7 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
     #Adding index 0 back into the list for $0 change at the beginning of the year
     change.insert(0,0)  
      
-    #Zipping the lists and converting to dictionary
+    #Zipping the lists and converting to dictionary to get key-value pairs for the matching datas for increase/decrease
     d = dict(zip(dates, change)) 
     
     #Using the values of increase and decrease to find the dictionary keys for increase/decrease dates

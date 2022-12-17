@@ -8,7 +8,6 @@ election_csv = os.path.join("C:/Users/diane/Desktop/Homework\Module3_Python/pyth
 
 #Creating empty lists
 voter = []
-county = []
 candidate = []
 candidates = []
 
@@ -24,7 +23,6 @@ with open(election_csv, "r", encoding="utf8") as csvfile:
     #Creating new lists 
     for line in csvreader:
         voter.append(line[0])
-        county.append(line[1])
         candidate.append(line[2])
     
     #Creating a set from candidate list to get the unique candidates

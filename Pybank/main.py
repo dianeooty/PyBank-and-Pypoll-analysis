@@ -5,11 +5,18 @@ import csv
 #Filepath for csv
 budget_csv = os.path.join("C:/Users/diane/Desktop/Homework/Module3_Python/python-challenge/Pybank", "resources", "budget_data.csv")
 
-#Assigning empty lists for appending
-dates = []
-p1 = []
-p2 = []
-change = []
+#Assigning empty lists and variables
+total_month = 0
+total_p = 0
+previous_p = 0
+current_p = 0
+change = 0
+month_change = 0
+increase = 0
+decrease = 0
+increase_month = ""
+decrease_month = ""
+total_change = 0
 
 #Opening csv file to read
 with open(budget_csv, "r", encoding="utf8") as csvfile:
@@ -19,78 +26,57 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
 
     #Skipping header row on csv
     csvheader = next(csvreader)
-
-    #Creating a lists for dates and profit/loss
-    #Creating a duplicate list of profit/loss for change in profit calculation
+    
+    #Using for loop to obtain needed data for analyis
     for line in csvreader:
-        dates.append(line[0])
-        p1.append(line[1])   
-        p2.append(line[1])
+        #Counting total months
+        total_month += 1
+        #Converting the string values of line[1] to integer values for calculation
+        total_p += int(line[1])
+        current_p = int(line[1])     
+        
+        #Conditional statement to find the total change in profits not including the first month since there isn't a previous value
+        #The change value is the difference of the current minus the previous
+        #Counting the number of months for changes using a counter that started at 0 and add 1 for each row  
+        #Total change started at 0 and updated with change value for each row
+        #Reassigning previous to current values for each row it loops through
+        if previous_p != 0:
+            change = current_p - previous_p
+            month_change += 1  
+            total_change += change                    
+        previous_p = current_p  
+        
+        #Conditional statement to check change value for greatest increase and finding the corresponding month of the increase
+        #Reassigning increase value if change is greater than increase
+        #Grabbing the increase month which is the value of line[0] 
+        if change > increase:
+            increase = change
+            increase_month = line[0]
 
-    #Converting the values in pl from strings to integers and summing up for total
-    p1 = [int(x) for x in p1]
-    total = (sum(p1)) 
+        #Conditional statement to check change value for greatest decrease and finding the corresponding month of the decrease
+        #Reassigning decrease value if change is lower than decrease
+        #Grabbing the decrease month which is the value of line[0]     
+        if change < decrease:
+            decrease = change
+            decrease_month = line[0]
     
-    #Popping index 0 on duplicate list to use to subtract for changes
-    p2 = [int(x) for x in p1]
-    p2.pop(0)
-    
-    #Zipping the two lists of profits/losses to create a new lists with the calculated changes in profit
-    for x, y in zip(p1, p2):
-        c = x - y
-        change.append(c)
-    
-    #Calculating the average of the changes in profit using sum, rounding to 2 decimals and dividing by list length
-    average = round(sum(change) / len(p2), 2)
-    
-    #Finding the max and min from the change list using min and max 
-    increase = (max(change))
-    decrease = (min(change)) 
-    
-    #Adding index 0 back into the list for $0 change at the beginning 
-    change.insert(0,0) 
-    
-    #Zipping the lists and converting to dictionary
-    d = dict(zip(dates, change))
-    
-    #Using the values of increase and decrease to find the dictionary keys for increase/decrease dates
-    date = [k for k, v in d.items() if v == increase]
-    date2 = [k for k, v in d.items() if v == decrease]
-    
-    #Printing Finanacial Analysis Results
-    print("------------------------------------------------------------")
-    print("Financial Analysis")
-    print("------------------------------------------------------------")
-    print(f"Total Months:  {len(dates)}")
-    print(f"Total:  ${total}")
-    print(f"Average Change:  ${average}")
-    print(f"Greatest Increase in Profits:  {date} ${increase}")
-    print(f"Greatest Decrease in Profits:  {date2} ${decrease}")
-    print("------------------------------------------------------------")
-    
-#Creating a variable called analysis as a list of the lines to write to txt file
-analysis = ["-------------------------------------------------------",
-            "",
-            "Financial Analysis",
-            "",
-            "-------------------------------------------------------",
-            "",
-            "Total Months: 86",
-            "",
-            "Total:  $22564198",
-            "",
-            "Average Change:  $8311.11",
-            "",
-            "Greatest Increase in Profits:  Feb-14  $1825558",
-            "",
-            "Greatest Decrease in Profits:  Aug-16  $-1862002",
-            "",
-            "-------------------------------------------------------"]
+#Assigning the printout to a variable called result that contains all the analysis data for output   
+result = f"""
+Financial Analysis
+----------------------------
+Total Months: {total_month}
+Total: ${total_p:,}
+Average Change: ${total_change / month_change:,.2f}
+Greatest Increase in Profits: {increase_month} (${increase:,})
+Greatest Decrease in Profits: {decrease_month} (${decrease:,})
+"""
+
+#Printing the output to terminal for variable called result
+print(result)
 
 #Naming the txt file
 filename = "financialanalysis.txt"
 
-#Writing to txt file using for loop to write each line item in the variable called analysis
+#Writing to txt file of the analysis data contained in the result variable
 with open(filename, "w") as f:
-    for items in analysis:
-        f.write(items + "\n")
+        f.write(result)

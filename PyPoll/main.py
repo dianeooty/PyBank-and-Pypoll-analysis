@@ -52,7 +52,7 @@ with open(filename, "w") as f:
 
     Total Votes: {total_votes:,}
 
-    -------------------------------------------------\n
+    -------------------------------------------------
     """
     #Printing election results to the terminal
     print(election_results)

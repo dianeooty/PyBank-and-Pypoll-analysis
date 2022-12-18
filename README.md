@@ -39,11 +39,18 @@ import csv
 #Filepath for csv
 budget_csv = os.path.join("C:/Users/diane/Desktop/Homework/Module3_Python/python-challenge/Pybank", "resources", "budget_data.csv")
 
-#Assigning empty lists for appending
-dates = []
-p1 = []
-p2 = []
-change = []
+#Assigning empty lists and variables
+total_month = 0
+total_p = 0
+previous_p = 0
+current_p = 0
+change = 0
+month_change = 0
+increase = 0
+decrease = 0
+increase_month = ""
+decrease_month = ""
+total_change = 0
 
 #Opening csv file to read
 with open(budget_csv, "r", encoding="utf8") as csvfile:
@@ -53,83 +60,72 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
 
     #Skipping header row on csv
     csvheader = next(csvreader)
-
-    #Creating a lists for dates and profit/loss
-    #Creating a duplicate list of profit/loss for change in profit calculation
+    
+    #Using for loop to obtain needed data for analyis
     for line in csvreader:
-        dates.append(line[0])
-        p1.append(line[1])
-        p2.append(line[1])
-
-    #Zipped the two lists and converted to a dictionary
-    newlist = dict(zip(dates, p1))
-
-    #Converting the values in pl from strings to integers and summing up for total
-    i_p1 = [int(x) for x in p1]
-    i_p2 = [int(x) for x in p1]
-    total = (sum(i_p1)) 
-
-    #Popping index 0 on duplicate list to use to subtract for changes
-    i_p2.pop(0)
-    
-    #Zipping the two lists of profits/losses to create a new lists with the calculated changes in profit
-    for x, y in zip(i_p1, i_p2):
-        c = x - y
-        change.append(c)
-    
-    #Calculating the average of change in profits
-    average = round(sum(change) / len(i_p2),2)
+        #Counting total months
+        total_month += 1
+        #Converting the string values of line[1] to integer values for calculation
+        total_p += int(line[1])
+        current_p = int(line[1])     
         
-    #Finding the max and min from the change list  
-    increase = (max(change))
-    decrease = (min(change))
+        #Conditional statement to find the total change in profits not including the first month since there isn't a previous value
+        #The change value is the difference of the current minus the previous
+        #Counting the number of months for changes using a counter that started at 0 and add 1 for each row  
+        #Total change started at 0 and updated with change value for each row
+        #Reassigning previous to current values for each row it loops through
+        if previous_p != 0:
+            change = current_p - previous_p
+            month_change += 1  
+            total_change += change                    
+        previous_p = current_p  
+        
+        #Conditional statement to check change value for greatest increase and finding the corresponding month of the increase
+        #Reassigning increase value if change is greater than increase
+        #Grabbing the increase month which is the value of line[0] 
+        if change > increase:
+            increase = change
+            increase_month = line[0]
 
-    #Adding index 0 back into the list for $0 change at the beginning of the year
-    change.insert(0,0)  
-     
-    #Zipping the lists and converting to dictionary
-    d = dict(zip(dates, change)) 
+        #Conditional statement to check change value for greatest decrease and finding the corresponding month of the decrease
+        #Reassigning decrease value if change is lower than decrease
+        #Grabbing the decrease month which is the value of line[0]     
+        if change < decrease:
+            decrease = change
+            decrease_month = line[0]
     
-    #Using the values of increase and decrease to find the dictionary keys for increase/decrease dates
-    date = [k for k, v in d.items() if v == increase]
-    date2 = [k for k, v in d.items() if v == decrease]
+#Assigning the printout to a variable called result that contains all the analysis data for output   
+result = f"""
 
-    #Printing Finanacial Analysis Results
-    print("------------------------------------------------------------")
-    print("Financial Analysis")
-    print("------------------------------------------------------------")
-    print(f"Total Months:  {len(dates)}")
-    print(f"Total:  ${total}")
-    print(f"Average Change:  ${average}")
-    print(f"Greatest Increase in Profits:  {date} ${increase}")
-    print(f"Greatest Decrease in Profits:  {date2} ${decrease}")
-    print("------------------------------------------------------------")
+Financial Analysis
 
-#Creating a variable called analysis as a list of the lines to write to txt file
-analysis = ["-------------------------------------------------------",
-            "",
-            "Financial Analysis",
-            "",
-            "-------------------------------------------------------",
-            "",
-            "Total Months: 86",
-            "",
-            "Average Change:  $8311.11",
-            "",
-            "Greatest Increase in Profits:  Feb-14  $1825558",
-            "",
-            "Greatest Decrease in Profits:  Aug-16  $-1862002",
-            "",
-            "-------------------------------------------------------"]
+---------------------------------------------------
+
+Total Months: {total_month}
+
+Total: ${total_p:,}
+
+Average Change: ${total_change / month_change:,.2f}
+
+Greatest Increase in Profits: {increase_month} (${increase:,})
+
+Greatest Decrease in Profits: {decrease_month} (${decrease:,})
+
+---------------------------------------------------
+
+"""
+
+#Printing the output to terminal for variable called result
+print(result)
+
 #Naming the txt file
 filename = "financialanalysis.txt"
 
-#Writing to txt file using for loop to write each line item in the variable called analysis
+#Writing to txt file of the analysis data contained in the result variable
 with open(filename, "w") as f:
-    for items in analysis:
-        f.write(items + "\n") 
+        f.write(result)
         
-PyPoll
+PyBank
 #Importing modules
 import os
 import csv
@@ -137,11 +133,14 @@ import csv
 #Filepath for csv
 election_csv = os.path.join("C:/Users/diane/Desktop/Homework\Module3_Python/python-challenge/PyPoll","Resources", "election_data.csv")
 
-#Creating empty lists
-voter = []
-county = []
-candidate = []
-candidates = []
+
+#Creating empty lists, dictionary and variables
+candidate_list = []
+candidates = {}
+total_votes = 0
+winning_count = 0
+winning_percentage = 0
+
 
 #Opening csv file to read
 with open(election_csv, "r", encoding="utf8") as csvfile:
@@ -152,77 +151,69 @@ with open(election_csv, "r", encoding="utf8") as csvfile:
     #Skipping header row on csv
     csvheader = next(csvreader)
 
-    #Creating new lists 
+    #Using for loop to count total number of votes through each row and adding 1
+    #Assigning variable called candidate name for values in line[2]
     for line in csvreader:
-        voter.append(line[0])
-        county.append(line[1])
-        candidate.append(line[2])
-    
-    #Creating a set from candidate list to get the unique candidates
-    candidates = list(set(candidate))
-    
-    #Counting the total votes for each candidate
-    cancount1 = candidate.count(candidates[0])
-    cancount2 = candidate.count(candidates[1])
-    cancount3 = candidate.count(candidates[2])
+        total_votes += 1
+        candidate_name = line[2]
 
-    #Calculating the percentage of votes for each candidate
-    canpercent1 = round(((cancount1 / len(voter)) * 100),3)
-    canpercent2 = round(((cancount2 / len(voter)) * 100),3)
-    canpercent3 = round(((cancount3 / len(voter)) * 100),3)
-
-    #Checking which candidate has the greatest number of votes with conditional statements
-    winner = ""
-    if cancount1 > (cancount2 and cancount3):
-        winner = candidates[0]
-    elif cancount2 > (cancount1 and cancount3):
-        winner = candidates[1]
-    elif cancount3 > (cancount1 and cancount2):
-        winner = candidates[2]
- 
-    #Printing results
-    print("-----------------------------------------------------------")
-    print("Election Results")
-    print("-----------------------------------------------------------")
-    print("Total Votes:  "+ str(len(voter)))
-    print("-----------------------------------------------------------")
-    print(f"{candidates[0]}: {canpercent1}%  ({cancount1})")
-    print(f"{candidates[1]}: {canpercent2}%  ({cancount2})") 
-    print(f"{candidates[2]}: {canpercent3}%  ({cancount3})")
-    print("-----------------------------------------------------------")
-    print(f"Winner:  {winner}")
-    print("-----------------------------------------------------------")
-
-#Creating a variable called results as a list of the lines to write to txt file
-results = ["-------------------------------------------------------",
-            "",
-            "Election Results",
-            "",
-            "-------------------------------------------------------",
-            "",
-            "Total Votes: 369711",
-            "",
-            "-------------------------------------------------------",
-            "",
-            "Charles Casper Stockham: 23.049%  (85213)",
-            "",
-            "Raymon Anthony Doane: 3.139%  (11606)",
-            "",
-            "Diana DeGette: 73.812%  (272892)",
-            "",
-            "-------------------------------------------------------",
-            "",
-            "Winner:  Diana DeGette",
-            "",
-            "-------------------------------------------------------"]
-
+        #Conditional statement to check the values in candidate name is not in the candidate list
+        #Appending the values found to candidate list which will contain the unique candidates found in each row from candidate name
+        #Starting the dictionary with vote count value of 0 for each unique candidate's name key 
+        if candidate_name not in candidate_list:
+            candidate_list.append(candidate_name)
+            candidates[candidate_name] = 0
+            
+        #Adding 1 to their vote count as dictionary value with each row and key as candidate's name
+        candidates[candidate_name] += 1
+                      
 #Naming the txt file
-filename = "results.txt"
+filename = "results.txt"   
 
-#Writing to txt file using for loop to write each line item in the variable called results 
+#Writing to the text file
 with open(filename, "w") as f:
-    for items in results:
-        f.write(items + "\n")
+    #Using a variable called election results and displaying the count from the total votes variable
+    election_results = (
+        f"\nElection Results\n\n"
+        f"-------------------------------------------------\n\n"
+        f"Total Votes: {total_votes:,}\n\n"
+        f"-------------------------------------------------\n\n")
+    #Printing election results to the terminal
+    print(election_results, end="")
+    #Writing the election results to the text file
+    f.write(election_results)
+    
+    #Using for loop to search through the dictionary to get the number of votes for each candidate
+    #Calculating each candidates vote percentage using their vote counts and dividing by total votes and multiplying by 100
+    #Assigning a variable called candidate results to print out each candidate's total votes and vote percentage from calculation
+    for candidate_name in candidates:
+        votes = candidates[candidate_name]
+        vote_percentage = float(votes) / float(total_votes) * 100
+        candidate_results = (
+            f"{candidate_name}: {vote_percentage:.3f}% ({votes:,})\n\n")
+       
+        #Printing the candidate results to the terminal
+        print(candidate_results)
+        #writing the results for each candidate to text file            
+        f.write(candidate_results)
+        
+        #Conditional statement to check which candidate has the greatest vote counts and vote percentage
+        #Assiging the greatest vote counts and vote percentage to variables called winning count and winning percentage
+        #Grabbing the name of the winning candidate and assigning value to variable called winning candidate
+        if (votes > winning_count) and ( vote_percentage > winning_percentage):
+            winning_count = votes
+            winning_candidate = candidate_name
+            winning_percentage = vote_percentage
+
+    #Printing the winning candidate to the terminal
+    winner = (
+        f"---------------------------------------------\n\n"
+        f"Winner: {winning_candidate}\n\n"
+        f"---------------------------------------------\n\n")
+    print(winner)
+
+    #Save the winning candidate's name to the text file
+    f.write(winner)
 ```
 
 

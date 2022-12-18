@@ -32,6 +32,7 @@ To analyze the datasets for PyBank and PyPoll, please see scripts below.
 
 ```
 PyBank
+
 #Importing modules
 import os
 import csv
@@ -125,7 +126,8 @@ filename = "financialanalysis.txt"
 with open(filename, "w") as f:
         f.write(result)
         
-PyBank
+PyPoll
+
 #Importing modules
 import os
 import csv

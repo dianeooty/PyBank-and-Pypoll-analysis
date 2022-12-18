@@ -62,13 +62,23 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
     
 #Assigning the printout to a variable called result that contains all the analysis data for output   
 result = f"""
+
 Financial Analysis
-----------------------------
+
+---------------------------------------------------
+
 Total Months: {total_month}
+
 Total: ${total_p:,}
+
 Average Change: ${total_change / month_change:,.2f}
+
 Greatest Increase in Profits: {increase_month} (${increase:,})
+
 Greatest Decrease in Profits: {decrease_month} (${decrease:,})
+
+---------------------------------------------------
+
 """
 
 #Printing the output to terminal for variable called result

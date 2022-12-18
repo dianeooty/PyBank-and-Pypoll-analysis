@@ -68,8 +68,6 @@ with open(filename, "w") as f:
         print(candidate_results)
         #writing the results for each candidate to text file            
         f.write(candidate_results)
-        # f.write(candidate_results)
-        # f.write(candidate_results)   
         
         #Conditional statement to check which candidate has the greatest vote counts and vote percentage
         #Assiging the greatest vote counts and vote percentage to variables called winning count and winning percentage

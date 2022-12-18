@@ -5,7 +5,6 @@ import csv
 #Filepath for csv
 election_csv = os.path.join("C:/Users/diane/Desktop/Homework\Module3_Python/python-challenge/PyPoll","Resources", "election_data.csv")
 
-
 #Creating empty lists, dictionary and variables
 candidate_list = []
 candidates = {}
@@ -40,35 +39,41 @@ with open(election_csv, "r", encoding="utf8") as csvfile:
         candidates[candidate_name] += 1
                       
 #Naming the txt file
-filename = "results.txt"   
+filename = "results.txt" 
 
 #Writing to the text file
 with open(filename, "w") as f:
-    #Using a variable called election results and displaying the count from the total votes variable
-    election_results = (
-        f"\nElection Results\n\n"
-        f"-------------------------------------------------\n\n"
-        f"Total Votes: {total_votes:,}\n\n"
-        f"-------------------------------------------------\n\n")
-    #Printing election results to the terminal
-    print(election_results, end="")
-    #Writing the election results to the text file
-    f.write(election_results)
     
+#Using a variable called election results and displaying the count from the total votes variable
+    election_results = f"""
+    Election Results
+
+    -------------------------------------------------
+
+    Total Votes: {total_votes:,}
+
+    -------------------------------------------------\n
+    """
+    #Printing election results to the terminal
+    print(election_results)
+    #Writing the election results to the text file  
+    f.write(election_results)
+
     #Using for loop to search through the dictionary to get the number of votes for each candidate
     #Calculating each candidates vote percentage using their vote counts and dividing by total votes and multiplying by 100
     #Assigning a variable called candidate results to print out each candidate's total votes and vote percentage from calculation
     for candidate_name in candidates:
         votes = candidates[candidate_name]
         vote_percentage = float(votes) / float(total_votes) * 100
-        candidate_results = (
-            f"{candidate_name}: {vote_percentage:.3f}% ({votes:,})\n\n")
-       
+        candidate_results = f"""
+    {candidate_name}: {vote_percentage:.3f}% ({votes:,})
+    """   
         #Printing the candidate results to the terminal
         print(candidate_results)
-        #writing the results for each candidate to text file            
-        f.write(candidate_results)
         
+        #Writing the results for each candidate to text file                   
+        f.write(candidate_results)
+          
         #Conditional statement to check which candidate has the greatest vote counts and vote percentage
         #Assiging the greatest vote counts and vote percentage to variables called winning count and winning percentage
         #Grabbing the name of the winning candidate and assigning value to variable called winning candidate
@@ -78,15 +83,17 @@ with open(filename, "w") as f:
             winning_percentage = vote_percentage
 
     #Printing the winning candidate to the terminal
-    winner = (
-        f"---------------------------------------------\n\n"
-        f"Winner: {winning_candidate}\n\n"
-        f"---------------------------------------------\n\n")
+    winner = f"""
+    --------------------------------------------------
+
+    Winner: {winning_candidate}
+
+    --------------------------------------------------\n
+    """
     print(winner)
 
-    #Save the winning candidate's name to the text file
+    #Writing the winning candidate's name to the text file
     f.write(winner)
-
             
         
     

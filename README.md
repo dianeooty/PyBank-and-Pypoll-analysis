@@ -231,7 +231,7 @@ Project is in progress.
 
 
 ## Acknowledgements
-- Many thanks to my learning instructors, TAs and learning assistants. Also, special thanks to Kelsey Brantner and Alex Hart in my study group. 
+- Many thanks to my learning instructors, TAs and learning assistants. Also, special thanks to Kelsey Brantner and Alex Hart from my study group, as well as my tutor, David Chao.
 
 
 ## Contact

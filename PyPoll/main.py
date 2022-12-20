@@ -3,7 +3,7 @@ import os
 import csv
 
 #Filepath for csv
-election_csv = os.path.join("PyPoll","resources","election_data.csv")
+election_csv = os.path.join("python-challenge","PyPoll","resources","election_data.csv")
 
 #Creating empty lists, dictionary and variables
 candidate_list = []

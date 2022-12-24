@@ -3,7 +3,7 @@ import os
 import csv
 
 #Filepath for csv
-budget_csv = os.path.join("Pybank", "resources", "budget_data.csv")
+budget_csv = os.path.join("Pybank","Resources", "budget_data.csv")
 
 #Assigning empty lists and variables
 total_month = 0
@@ -19,7 +19,7 @@ decrease_month = ""
 total_change = 0
 
 #Opening csv file to read
-with open(budget_csv, "r", encoding="utf8") as csvfile:
+with open(budget_csv, "r", encoding="utf-8") as csvfile:
 
     #Assigning reader object
     csvreader = csv.reader(csvfile, delimiter=",")
@@ -27,7 +27,7 @@ with open(budget_csv, "r", encoding="utf8") as csvfile:
     #Skipping header row on csv
     csvheader = next(csvreader)
     
-    #Using for loop to obtain needed data for analyis
+    #Using for loop to obtain needed data for analysis
     for line in csvreader:
         #Counting total months
         total_month += 1

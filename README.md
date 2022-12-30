@@ -38,7 +38,7 @@ import os
 import csv
 
 #Filepath for csv
-budget_csv = os.path.join("Resources", "budget_data.csv")
+budget_csv = os.path.join("resources", "budget_data.csv")
 
 #Assigning empty lists and variables
 total_month = 0
@@ -134,7 +134,7 @@ import os
 import csv
 
 #Filepath for csv
-election_csv = os.path.join("Resources", "election_data.csv")
+election_csv = os.path.join("resources", "election_data.csv")
 
 #Creating empty lists, dictionary and variables
 candidate_list = []
@@ -229,7 +229,7 @@ with open(filename, "w") as f:
 
 
 ## Project Status
-Project is in progress.
+Project is complete and no longer being worked on.
 
 
 ## Acknowledgements

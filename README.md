@@ -1,5 +1,5 @@
 # Python Challenge
-> I was tasked with two Python challenges called PyBank and PyPoll for the Module 3 Challenge of my Data Analytics and Visualization Boot Camp. 
+> Using python scripts, analyze the PyBank and PyPoll datasets.  
 
 
 ## Table of Contents
@@ -13,8 +13,8 @@
 
 
 ## General Information
-- The PyBank challenge was to create a Python script that analyzes the dataset of a financial company.  The dataset reflected the profit and losses of the company over a period. The script must calculate the total number of months included in the dataset, net total amount of "Profits/Losses", the changes in "Profits/Losses" and the both the greatest increase and decrease for the entire period.  The results must print out to the terminal and export a text file with the results.
-- The PyPoll Challenge was to create a Python script that analyzes the outcome of an election dataset.  The dataset reflected the voter’s ID, the candidate voted for and the counties.  From the dataset, the script must calculate the total amount of votes, a list of candidates who received votes, the percentage and number of votes for each candidate and the winner of the election.  The results must print out to the terminal and export a text file with the results.
+- The PyBank project was to create a Python script that analyzes the dataset of a financial company.  The dataset reflected the profit and losses of the company over a period. The script must calculate the total number of months included in the dataset, net total amount of "Profits/Losses", the changes in "Profits/Losses" and the both the greatest increase and decrease for the entire period.  The results must print out to the terminal and export a text file with the results.
+- The PyPoll project was to create a Python script that analyzes the outcome of an election dataset.  The dataset reflected the voter’s ID, the candidate voted for and the counties.  From the dataset, the script must calculate the total amount of votes, a list of candidates who received votes, the percentage and number of votes for each candidate and the winner of the election.  The results must print out to the terminal and export a text file with the results.
 
 
 ## Technologies Used
@@ -233,7 +233,7 @@ Project is complete and no longer being worked on.
 
 
 ## Acknowledgements
-- Many thanks to my learning instructors, TAs and learning assistants. Also, special thanks to Kelsey Brantner and Alex Hart from my study group, as well as my tutor, David Chao.
+- Many thanks to the instructional team and special thanks to Kelsey Brantner, Alex Hart, and David Chao.
 
 
 ## Contact

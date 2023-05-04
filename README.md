@@ -23,6 +23,11 @@
 - Excel
 
 
+## Screenshots
+![1](https://user-images.githubusercontent.com/117790100/236303955-eb49a8c8-addc-489c-8f67-61ab89abb7bf.png)
+![2](https://user-images.githubusercontent.com/117790100/236303957-bcbdf8d4-471b-42a8-9f18-3cbf4d91a80c.png)
+
+
 ## Setup
 You can find the complete datasets for both in the resource folders and the analysis text files in the analysis folders.
 
